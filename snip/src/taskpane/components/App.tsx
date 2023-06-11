@@ -68,7 +68,6 @@ export default class App extends React.Component<AppProps, AppState> {
       await context.sync();
     });
   };
-
   render() {
     const { title, isOfficeInitialized } = this.props;
 
