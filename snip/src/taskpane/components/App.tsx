@@ -54,32 +54,12 @@ export default class App extends React.Component<AppProps, AppState> {
     });
   }
 
-  // click = async () => {
-  //   return Word.run(async (context) => {
-  //     /**
-  //      * Insert your Word code here
-  //      */
-
-  //     let texto1=`De mi consideración:
-  //     Luego de un cordial saludo y en atención a su Oficio mediante el cual presentó una
-  //     apelación impuesta a su vehículo de placas ABA9121; al respecto me permito remitir un
-  //     ejemplar original del Acta elabora por la Comisión de Apelaciones, encargada de resolver
-  //     su reclamo.
-  //     Sin otro particular, suscribo.`;
-
-  //     // insert a paragraph at the end of the document.
-  //     // const paragraph = context.document.body.insertParagraph(texto1, Word.InsertLocation.end);
-  //     const paragraphs = texto1.split('\n');
-  //       paragraphs.forEach(paragraph => {
-  //       context.document.body.insertText(paragraph, Word.InsertLocation.end);
-  //       context.document.body.insertParagraph("", Word.InsertLocation.end);
-  //     });
-  //     // change the paragraph color to blue.
-  //     // paragraph.font.color = "blue";
-
-  //     await context.sync();
-  //   });
-  // };
+  handleSaveTagData = (tag: string, text: string) => {
+    saveTagData(tag, text);
+    const tagData = getTagData();
+    this.setState({ tagData });
+  };
+  
   click = async () => {
     if (this.state.isAddingTag) {
       // Save the new tag and text
