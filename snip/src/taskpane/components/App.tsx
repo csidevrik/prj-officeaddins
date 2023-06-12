@@ -4,6 +4,10 @@ import Header from "./Header";
 import HeroList, { HeroListItem } from "./HeroList";
 import Progress from "./Progress";
 
+import TagInput from "./TagInput";
+import { saveTagData, getTagData, TagData } from "./TagData";
+
+
 /* global Word, require */
 
 export interface AppProps {
@@ -16,10 +20,12 @@ export interface AppProps {
 // }
 export interface AppState {
   listItems: HeroListItem[];
+  tags: TagData[];
+
   isAddingTag: boolean;
   newTag: string;
   newText: string;
-  tags: { tag: string; text: string }[];
+  // tags: { tag: string; text: string }[];
 }
 
 
@@ -28,38 +34,26 @@ export default class App extends React.Component<AppProps, AppState> {
     super(props, context);
     this.state = {
       listItems: [],
+      tags: [],
+
       isAddingTag: false,
       newTag: "",
       newText: "",
-      tags: [],
+      // tags: [],
     };
   }
 
   componentDidMount() {
-    this.setState({
-      listItems: [
-        {
-          icon: "Ribbon",
-          primaryText: "Achieve more with Office integration",
-        },
-        {
-          icon: "Unlock",
-          primaryText: "Unlock features and functionality",
-        },
-        {
-          icon: "Design",
-          primaryText: "Create and visualize like a pro",
-        },
-      ],
-    });
+    const tags = getTagData();
+    this.setState({tags});
   }
 
   handleSaveTagData = (tag: string, text: string) => {
     saveTagData(tag, text);
     const tagData = getTagData();
-    this.setState({ tagData });
+    this.setState({ tags:tagData });
   };
-  
+
   click = async () => {
     if (this.state.isAddingTag) {
       // Save the new tag and text
@@ -72,6 +66,7 @@ export default class App extends React.Component<AppProps, AppState> {
   };
 
   render() {
+    const { tags } = this.state;
     const { title, isOfficeInitialized } = this.props;
 
     if (!isOfficeInitialized) {
@@ -87,6 +82,18 @@ export default class App extends React.Component<AppProps, AppState> {
     return (
       <div className="ms-welcome">
         <Header logo={require("./../../../assets/logo-filled.png")} title={this.props.title} message="Bienvenido" />
+        <div>
+        <h1>Tag Data:</h1>
+        <ul>
+          {tags.map((data, index) => (
+            <li key={index}>
+              <strong>Tag:</strong> {data.tag}, <strong>Text:</strong> {data.text}
+            </li>
+          ))}
+        </ul>
+        <h2>Add Tag and Text</h2>
+        <TagInput onSave={this.handleSaveTagData} />
+      </div>
         <HeroList message="Discover what Office Add-ins can do for you today!" items={this.state.listItems}>
           {this.state.isAddingTag ? (
             <div>
