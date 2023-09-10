@@ -10,6 +10,7 @@ Office.onReady((info) => {
     document.getElementById("sideload-msg").style.display = "none";
     document.getElementById("app-body").style.display = "flex";
     document.getElementById("run").onclick = run;
+    document.getElementById("findz").onclick = findz;
   }
 });
 
@@ -26,5 +27,21 @@ export async function run() {
     paragraph.font.color = "blue";
 
     await context.sync();
-  });
-}
+  });}
+
+export async function findz() {
+  return Word.run(async (context) => {
+
+    /**
+     * Insert your Word code here
+     */
+
+    // insert a paragraph at the end of the document.
+    const paragraph = context.document.body.insertParagraph("Buscando Zips, este texto se adiciona al final del texto", Word.InsertLocation.end);
+
+    // change the paragraph color to blue.
+    paragraph.font.color = "green";
+
+    await context.sync();
+
+  });}
