@@ -31,7 +31,6 @@ export async function run() {
 
 export async function findz() {
   return Word.run(async (context) => {
-
     /**
      * Insert your Word code here
      */
