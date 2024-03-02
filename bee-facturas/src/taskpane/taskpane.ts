@@ -48,7 +48,7 @@ export async function findz() {
      */
 
     // insert a paragraph at the end of the document.
-    const paragraph = context.document.body.insertParagraph("Buscando Zips, este texto se adiciona al final del texto",Word.InsertLocation.end);
+    const paragraph = context.document.body.insertParagraph("Buscand, este texto se adiciona al final del texto",Word.InsertLocation.end);
 
     // change the paragraph color to blue.
     paragraph.font.color = "green";
