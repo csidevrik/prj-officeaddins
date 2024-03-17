@@ -35,11 +35,32 @@ export async function run() {
     const paragraph = context.document.body.insertParagraph("Hello World", Word.InsertLocation.end);
 
     // change the paragraph color to blue.
-    paragraph.font.color = "blue";
+    paragraph.font.color = "#80d5e3";
 
     await context.sync();
   });
 }
+
+export async function getListInfoPropers(){
+  return Word.run(async  (context) =>{
+
+    const infoProperties = context.document.properties.customProperties;
+    infoProperties.load("key,type,value");
+
+    await context.sync();
+    for (let i = 0; i < infoProperties.items.length; i++)
+      console.log(
+        "Property Name:" +
+          infoProperties.items[i].key +
+          "; Type=" +
+          infoProperties.items[i].type +
+          "; Property Value=" +
+          infoProperties.items[i].value
+    );
+
+  });
+}
+
 
 export async function findz() {
   return Word.run(async (context) => {
