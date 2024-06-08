@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "eslint-plugin-office-addins": "^3.0.1",
+    "office-addin-lint": "^2.3.2"
+  }
+}
